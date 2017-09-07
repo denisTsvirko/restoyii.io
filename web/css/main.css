@@ -1,0 +1,1137 @@
+@font-face {
+    font-family: 'Aleo Bold';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Aleo Bold'), local('Aleo-Bold'),
+        url('../fonts/aleo/aleo-bold_90e1aa58b8ee6fb4b81a0509d2b0251a.woff') format('woff'),
+        url('../fonts/aleo/aleo-bold_90e1aa58b8ee6fb4b81a0509d2b0251a.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Aleo Light';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Aleo Light'), local('Aleo-Light'),
+        url('../fonts/aleo/light/aleo-light-webfont.woff') format('woff'),
+        url('../fonts/aleo/light/aleo-light-webfont.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Aleo Light Italic';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Aleo Light Italic'), local('Aleo-Light-Italic'),
+        url('../fonts/aleo/lightitalic/aleo-lightitalic-webfont.woff') format('woff'),
+        url('../fonts/aleo/lightitalic/aleo-lightitalic-webfont.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Aleo Regular';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Aleo Regular'), local('Aleo-Regular'),
+        url('../fonts/aleo/regular/aleo-regular-webfont.woff') format('woff'),
+        url('../fonts/aleo/regular/aleo-regular-webfont.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'WC Mano Negra Bta';
+    font-style: normal;
+    font-weight: 400;
+    src: local('WC Mano Negra Bta'), local('WCManoNegraBta-Regular'),
+        url('../fonts/wc-mano-negra-bta_da81fee61ee1a5d49f8bc5eabb2f1807.woff') format('woff'),
+        url('../fonts/wc-mano-negra-bta_da81fee61ee1a5d49f8bc5eabb2f1807.ttf') format('truetype');
+}
+.modal.fade {
+  top: -50%;
+}
+.info_auto{
+  font-family: "Aleo Regular";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18px;
+}
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+}
+.pagination li{
+  margin: 10px;
+ /* border: 1px solid;
+ // border-radius: 5px;*/
+  text-decoration-color: #c9302c;
+  padding: 5px;
+  list-style-type: none; /* Убираем маркеры */
+}
+.pagination li a{
+  color: #777;
+  font-weight: bold;
+  font-size: 20px;
+
+}
+.pagination .active{
+  /*border: 1px solid black;*/
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+  border-radius: 0px 0px 15px 0px;
+}
+.pagination .disabled{
+  display: none;
+}
+
+#main {
+  margin-left: 200px;
+  max-width: 1300px;
+}
+.pmu-instance nav{
+  padding: 0;
+}
+
+#header {
+      /* Style for "Shape 1" */
+    display: flex;
+    align-items: center;
+    margin-left: 200px;
+    margin-right: 200px;
+    /*width: 1500px;*/
+    /*height: 110px;*/
+    background-color: #ffffff;
+}
+#header_menu{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  flex-grow: 1;
+}
+#header_logo{
+  display: flex;
+
+  /*margin-right: 550px;*/
+  flex-grow: 9;
+}
+#header_log{
+    /* Style for "Resto" */
+  width: 68px;
+  height: 28px;
+  /*background-color: #3a3a3a;*/
+}
+#header_dot{
+/* Style for ".." */
+  width: 12px;
+  height: 6px;
+  margin-top: 20px;
+/*background-color: #f34949;*/
+}
+.header_menu_elem{
+    /* Style for "Our Story" */
+  color: #3b3b3b;
+  font-family: "Aleo Regular";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 60px;
+  margin: 20px;
+}
+.header_menu_elem a{
+  color: #3b3b3b;
+}
+.header_menu_elem, .active a{
+  color: #08c;
+  opacity: 0.8;
+
+}
+.active_menu{
+  border-bottom: 5px solid #08c;
+  border-radius: 5px;
+}
+
+#big_img_noline{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 569px;
+  background: url(../images/layer-1.png) no-repeat;
+  background-size: cover;
+}
+#big_img{
+    /* Style for "Layer 1" */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /*width: 1500px;*/
+  width: 100%;
+  height: 569px;
+  box-shadow: 0 4px 0 #f34949;
+  background: url(../images/layer-1.png) no-repeat;
+  background-size: cover;
+  /*background-size: 100%;*/
+}
+
+#big_img_text{
+  /* Style for "This Templ" */
+  /*width: 776px;*/
+  color: #ffffff;
+  font-family: "WC Mano Negra Bta";
+  font-size: 100px;
+  font-weight: 400;
+  line-height: 75px;
+  text-align: center;
+}
+#big_img_block{
+  display: flex;
+  align-items: center;
+}
+#big_img_block a{
+  /* Style for "resto rest" */
+/*width: 348px;
+height: 15px;*/
+margin: 35px;
+color: #ffffff;
+font-family: "Aleo Regular";
+font-size: 16px;
+font-weight: 400;
+/*line-height: 60px;*/
+}
+/**slider-----------------**/
+.block_slider{
+  display: flex;
+  flex-direction: column;
+
+}
+.info_eat_slider{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.name_el_slider{
+  color: #555555;
+  font-family: "Aleo Light";
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 60px;
+}
+.cost_slider{
+  /* Style for "$30" */
+  color: #555555;
+  font-family: "Aleo Light";
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 60px;
+}
+.votest_slider{
+  margin-top: -20px;
+  margin-left: -4px;
+}
+/*******************************************/
+.line{
+  /* Style for "Shape 19" */
+  display: block;
+  width: 40px;
+  height: 1px;
+  background-color: #ffffff;
+}
+.menu_contenr{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 200px;
+}
+.container_m{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+}
+.left_col_m{
+  width: 47%;
+}
+.right_col_m{
+  width: 47%;
+}
+.element{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 61px;
+}
+.element_one{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.name_eat{
+  width: 50%;
+  white-space: nowrap;
+  color: #555555;
+  font-family: "Aleo Regular";
+  font-size: 16px;
+  font-weight: 400;
+}
+.med_line{
+/* Style for "Shape 12" */
+  flex-grow: 2;
+  height: 1px;
+  background-color: #e5e3e3;
+}
+.container_menu_el .med_line{
+  flex-grow: 2;
+}
+.container_menu_el{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.container_menu_el .name_eat{
+  width: auto;
+}
+.container_menu_el .cost_eat{
+  width: auto;
+}
+.cost_eat{
+  width: 5%;
+  /* Style for "$50" */
+  color: #555555;
+  font-family: "Aleo Regular";
+  font-size: 16px;
+  font-weight: 400;
+}
+.info_eat{
+  width: 100%;
+  /* Style for "Cheese, to" */
+  color: #b7b7b7;
+  font-family: "Aleo Light Italic";
+  font-size: 12px;
+  font-weight: 300;
+}
+#flag_menu{
+  /* Style for "Shape 13" */
+  width: 155px;
+  height: 65px;
+  margin:0 auto;
+  padding: 5px;
+  /*margin-right: 41%;*/
+  /*background-color: #f34949;*/
+  background: url(../images/menuflag.png) repeat-y ;
+  text-align: center;
+  margin-bottom: 82px;
+}
+#flag_text{
+  /* Style for "The Menu" */
+width: 102px;
+height: 15px;
+color: #ffffff;
+font-family: "Aleo Bold";
+font-size: 20px;
+font-weight: 700;
+line-height: 60px;
+}
+.container_head_t{
+    display: flex;
+    align-items: center;
+    margin-bottom: 80px;
+    margin-left: 200px;
+}
+.conteiner_but{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.container_head_t h1{
+    font-family: "Aleo Bold";
+    /* Style for "Featured D" */
+  /*  width: 196px;
+    height: 15px;*/
+    color: #3b3b3b;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 60px;
+    text-transform: uppercase;
+}
+.big_line{
+/* Style for "Shape 12" */
+  margin-left: 20px;
+  /*width: 200px;*/
+  flex-grow: 2;
+  max-width: 200px;
+  height: 1px;
+  background-color: #e5e3e3;
+}
+/* Style for "Gallery" */
+#container_gallery{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+  /*width: 1100px;*/
+}
+
+#left_column{
+}
+
+#right_column{
+
+}
+#left_column img{
+    /*width: 50px;
+    height: 50px;*/
+    max-width: 318px;
+    max-height: 432px;
+
+}
+#right_column img{
+  max-width: 320px;
+  max-height: 216px;
+  margin-bottom: -1px;
+  margin-right: -4px;
+  /*width: 50px;
+  height: 50px;*/
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 432px;
+}
+.block_sm {
+  width: 50%;
+  height: 216px;
+  background: pink;
+  border: 1px solid #000;
+  box-sizing: border-box;
+}
+.block__big {
+  height: 432px;
+}
+
+#footer {
+  /* Style for "Footer" */
+  /* Style for "Shape 17" */
+
+  /*width: 1500px;*/
+
+  /*min-width: 1500px;*/
+  width: 100%;
+  /*height: 317px*/;
+  height: auto;
+  margin-top: 120px;
+  background-color: #3b3b3b;
+  /*display: flex;
+  justify-content: space-around;
+  align-items: center;*/
+}
+#footer_container{
+  /*margin-left: 200px;*/
+  /*max-width: 1100px;*/
+  width: auto;
+  /*height: 317px;*/
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+}
+.footer_block{
+  margin: 35px;
+  position: relative;
+
+  /*color: #ffffff;
+  font-family: "Aleo Regular";
+  /* Style for "New York R" */
+  /*font-size: 16px;
+  line-height: 30px;*/
+}
+.footer_block_a{
+  margin: 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.footer_block a{
+  color: #ffffff;
+}
+#footer_log{
+    /* Style for "Resto" */
+  /*width: 68px;
+  height: 28px;
+  margin-bottom: 30px;*/
+  /*background-color: #3a3a3a;*/
+}
+#footer_dot{
+/* Style for ".." */
+margin-top:20px;
+/*  width: 12px;
+  height: 6px;
+  margin-top: 20px;
+  margin-bottom: 30px;*/
+
+/*background-color: #f34949;*/
+}
+.center_a_foot{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: stretch;
+
+}
+.first_line_text{
+  /* Style for "Blog Caree" */
+  color: #ffffff;
+  font-family: "Aleo Regular";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18px;
+}
+.first_line_text a{
+  color: #ffffff;
+}
+
+.two_line_text, .two_line_txt_l{
+  /* Style for "Blog Caree" */
+  font-family: "Aleo Light";
+  /* Style for "© All Righ" */
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 10px;
+  /* Text style for "© All Righ" */
+  font-weight: 300;
+}
+.two_line_txt_l{
+  line-height: 38px;
+}
+.find_line_text{
+  /* Style for "Blog Caree" */
+  font-family: "Aleo Bold";
+  /* Style for "© All Righ" */
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 10px;
+  /* Text style for "© All Righ" */
+  font-weight: 300px;
+}
+
+#button_style{
+  /* Style for "Shape 15" */
+  width: 133px;
+  height: 34px;
+  border: 1px solid #d7d5d5;
+  margin: 0 auto;
+  background-color: #ffffff;
+  opacity: 0.7;
+}
+.mybutton{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.vert_line{
+  /* Style for "Shape 16" */
+  width: 1px;
+  height: 12px;
+  background-color: #b7b7b7;
+}
+.gul{
+  background: url(../images/shape-14.png) repeat-y;
+  width: 10px;
+  height: 7px;
+}
+
+.text_lvl_1{
+
+  font-family: "Aleo Bold";
+  line-height: 15px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 60px;
+}
+.text_lvl_2{
+  font-family: "Aleo Light Italic";
+  color: #f34949;
+}
+.text_lvl_3{
+  font-family: "Aleo Bold";
+  line-height: 25px;
+}
+.row-flex{
+  display: flex;
+  flex-flow: row wrap;
+
+}
+.span4 img{
+  width: inherit;
+}
+.vcenter{
+  margin-top: 30px;
+}
+/**---------------------contacts------------------------*/
+.spoiler_body {
+  display:none;
+  margin-top: 50px;
+}
+.spoiler_links {
+  cursor:pointer;
+}
+.show_map{
+  margin: 0 auto;
+  text-align: center;
+}
+a.button_map {
+  text-align: center;
+  min-width: 75px;
+  display: inline-block;
+  font-family: arial,sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  color: rgb(68,68,68);
+  text-decoration: none;
+  user-select: none;
+  padding: .2em 1.2em;
+  outline: none;
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: 2px;
+  background: rgb(245,245,245) linear-gradient(#f4f4f4, #f1f1f1);
+  transition: all .218s ease 0s;
+}
+a.button_map:hover {
+  color: rgb(24,24,24);
+  border: 1px solid rgb(198,198,198);
+  background: #f7f7f7 linear-gradient(#f7f7f7, #f1f1f1);
+  box-shadow: 0 1px 2px rgba(0,0,0,.1);
+}
+a.button_map:active {
+  color: rgb(51,51,51);
+  border: 1px solid rgb(204,204,204);
+  background: rgb(238,238,238) linear-gradient(rgb(238,238,238), rgb(224,224,224));
+  box-shadow: 0 1px 2px rgba(0,0,0,.1) inset;
+}
+.text_center{
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+}
+.container_rest{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+}
+.container_rest img{
+  width: auto;
+  height: auto;
+}
+.bloc_rest_info{
+  margin-top: 60px;
+  margin-bottom: 30px;
+}
+.add_res{
+  font-family: "Aleo Light Italic";
+}
+.tel_res{
+  font-family: "Aleo Light Italic";
+}
+/****-------------------------------------------------****/
+/*-------------------------reviews-------------------------------*/
+#content_reviews{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+#reviews{
+  margin-top: 30px;
+}
+
+.vcen {
+  display: inline-block;
+  float: none;
+  vertical-align: middle;
+}
+
+/*---------------------------------------------------------------*/
+/*-----------------------------menu------------------------------*/
+#menu{
+  margin-top: 50px;
+}
+.page-header h1{
+  /*font-family: "Aleo Bold";
+  line-height: 15px;
+  font-size: 20px;
+  font-weight: 700;*/
+}
+.page-header{
+  border-bottom: 1px solid #c3c3c3;
+}
+.big_text_menu{
+  font-family: "Aleo Light";
+  line-height: 15px;
+  font-size: 25px;
+  font-weight: 700;
+  text-align: center;
+}
+.midle_text_menu{
+  font-family: "Aleo Bold";
+  line-height: 15px;
+  font-size: 20px;
+  font-weight: 700;
+}
+.centreited_prise{
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.dots{
+  flex-grow: 2;
+  height: 1px;
+  background-color: #e5e3e3;
+}
+.container_prise{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+.container_prise_el{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+.container_prise_el .dots{
+  flex-grow: 2;
+}
+.container_prise_el .name_eat{
+  width: auto;
+}
+.container_prise_el .cost_eat{
+  width: auto;
+}
+
+.scrollup {
+    width: 40px;
+    height: 40px;
+    opacity: 0.3;
+    position: fixed;
+    bottom: 50px;
+    right: 35px;
+    display: none;
+    text-indent: -9999px;
+    z-index: 999;
+    background: url(../images/icon_top.png) no-repeat;
+}
+
+
+/*---------------------------------------------------------------*/
+/**меню страницы*/
+nav{
+    padding: 15px 10px;
+    color: #3b3b3b;
+    font-family: "Aleo Regular";
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 60px;
+    text-align: center;
+}
+/*
+color: #3b3b3b;
+font-family: "Aleo Regular";
+font-size: 14px;
+font-weight: 400;
+line-height: 60px;
+margin: 20px;
+*/
+nav > ul {
+   padding: 0;
+}
+nav li{
+    display: inline-block;
+    vertical-align: top;
+}
+nav a{
+    color: #3b3b3b;
+    padding: 5px 10px;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: 0.3s;
+}
+nav a:hover{
+    border: 1px solid #3b3b3b;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+nav label {
+    display: none;
+    border: 1px solid #fff;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+nav label:hover{
+    color: #f00;
+    border: 1px solid #f00;
+}
+/*---------------------Events--------------*/
+/*.ui-datepicker .selected-start:not(.selected-end) a,
+.ui-datepicker .selected-end:not(.selected-start) a {
+  background: #F3FDD5;
+}
+
+.ui-datepicker .selected.first-of-month:not(.selected-start) a {
+  border-left: 2px dotted #D4E7F6;
+  padding-left: 1px;
+}
+
+.ui-datepicker .selected.last-of-month:not(.selected-end) a {
+  border-right: 2px dotted #D4E7F6;
+  padding-right: 1px;
+}*/
+
+/*-------------------------------------------*/
+/*--------------------------reservation----------------------*/
+#content_reserv{
+  margin-top: 20px;
+}
+.container_reserv{
+  max-width: 1100px;
+	margin: 0 auto;
+	height: 100%;
+	padding: 0 5px;
+	overflow: hidden;
+  display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+.container_form_resv{
+  max-width: 1100px;
+	margin: 0 auto;
+	height: 100%;
+	padding: 0 5px;
+	overflow: hidden;
+  display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+.item_reserv{
+
+  max-width: 45%;
+	min-width: 200px;
+	margin: 10px 0;
+}
+.item_reserv img{
+  width: 100%;
+}
+.text_item{
+  text-align: center;
+  font-family: "Aleo Bold";
+  line-height: 15px;
+  font-size: 20px;
+  font-weight: 700;
+}
+.text_in{
+  font-family: "Aleo Regular";
+  line-height: 25px;
+  text-indent: 20px;
+  text-align: justify;
+  margin-right: 50px;
+}
+
+.border_txt{
+  padding: 3px;
+  border: 5px solid #b7b7b7;
+  border-radius: 20px;
+  opacity: 0.3;
+  transition: 1.5s;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  cursor: default;
+}
+.border_txt:hover{
+  opacity: 1;
+}
+.text_cent_reserver{
+  text-align: center;
+}
+.marg_col{
+  /*max-width: 330px;/=*/
+  resize: none;
+}
+
+
+/*----------------------------------------------------------*/
+/*------------------------Events----------------------------*/
+#content_events{
+  margin-top: 40px;
+}
+#concreat_event{
+  margin-top: 40px;
+  display: none;
+}
+.container_event{
+  max-width: 1100px;
+	margin: 0 auto;
+	height: 100%;
+	padding: 0 5px;
+	overflow: hidden;
+  display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+  align-items: flex-start;
+}
+.item_event{
+  text-align: center;
+  background-color: black;
+  height: 100%;
+  max-width: 30%;
+	min-width: 200px;
+	margin: 10px 0;
+  border-radius: 0px 0px 20px 20px;
+  flex-grow: 1;
+}
+.item_reserv img{
+  /*width: 75%;*/
+}
+.header_txt_ev{
+  margin-top: 3px;
+  margin: 3px;
+  color: #ffffff;
+  text-indent: 20px;
+  text-align: justify;
+  font-family: "Aleo Bold";
+  line-height: 20px;
+  font-size: 14px;
+  font-weight: 700;
+}
+.header_txt_ev a{
+  color: #ffffff
+}
+.date_txt_ev{
+  margin-top: -5px;
+  text-align: center;
+  color: #b7b7b7;
+  font-family: "Aleo Light Italic";
+  font-size: 12px;
+  font-weight: 300;
+}
+.clvisible{
+  display: none;
+}
+#back{
+  display: none;
+  margin: 0 auto;
+}
+.header_txt_concr{
+  text-align: center;
+  color: black;
+  font-family: "WC Mano Negra Bta";
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 50px;
+  text-align: center;
+
+}
+.date_txt_concr{
+  color: #b7b7b7;
+  font-family: "Aleo Light Italic";
+  font-size: 24px;
+  font-weight: 300;
+  text-align: center;
+}
+.inf_txt_concr{
+  text-align: justify;
+  text-indent: 20px;
+  font-family: "Aleo Bold";
+line-height: 25px;
+}
+/*----------------------------------------------------------*/
+.revie_cent{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+.revie_left{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  text-align: left;
+  align-items: left;
+}
+.novisible{
+  display: none;
+}
+.ourstr_clm{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  max-width: 560px;
+}
+.ourstr_rw{
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.ourstr_rw img{
+   width: 50%;
+
+}
+
+@media screen and (max-width: 1200px) {
+  .container_head_t{
+    margin-left: 160px;
+  }
+  /*.marg_col{
+    max-width: 269px;
+  }*/
+  .ourstr_clm {
+    max-width: 100%;
+  }
+  .ourstr_rw img{
+    width: inherit;
+    /*height: auto;*/
+  }
+  .ourstr_rw{
+    justify-content: center;
+  }
+
+}
+
+@media screen and (max-width: 1000px) {
+
+    nav label{
+         display: inline-block;
+    }
+    nav > ul {
+        display: none;
+    }
+    input[type="checkbox"]:checked ~ label + ul {
+        display: block;
+        margin: auto;
+    }
+
+}
+@media screen and (max-width: 980px) {
+  .container_head_t{
+    margin-left: 125px;
+  }
+  #container_gallery {
+    flex-direction: column;
+    align-items: center;
+  }
+  #right_column img{
+    margin-right: 0;
+  }
+  #left_column img {
+    max-width: 320px;
+  }
+  /*.marg_col{
+    max-width: 198px;
+  }*/
+}
+@media screen and (max-width: 760px) {
+    .container_head_t{
+      margin-left: 0px;
+    }
+    .container_reserv{
+      align-items: center;
+      flex-direction: column;
+    }
+    .item_reserv {
+      max-width: 100%;
+    }
+    .text_in{
+      margin-right: 0px;
+    }
+
+
+}
+
+@media screen and (max-width: 610px) {
+
+    .container_event{
+      flex-direction: column;
+      align-items: center;
+    }
+    .item_event{
+      max-width: 90%;
+    }
+    #header{
+      margin-left: 15px;
+      margin-right: 0;
+    }
+    #big_img{
+      height: auto;
+    }
+
+}
+@media screen and (max-width: 480px) {
+
+    /*#header{
+      margin-left: 15px;
+      margin-right: 0;
+    }*/
+    .ourstr_rw img{
+      height: 250px;
+      /*height: auto;*/
+    }
+}
+@media screen and (max-width: 345px) {
+
+    #big_{
+      display: none;
+    }
+}
+
+@media screen and (max-width: 300px) {
+
+    #header_logo{
+      display: none;
+    }
+}
+.button_map {
+  text-align: center;
+  min-width: 75px;
+  display: inline-block;
+  font-family: arial,sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  color: rgb(68,68,68);
+  text-decoration: none;
+  user-select: none;
+  padding: .2em 1.2em;
+  outline: none;
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: 2px;
+  background: rgb(245,245,245) linear-gradient(#f4f4f4, #f1f1f1);
+  transition: all .218s ease 0s;
+}
+.button_map:hover {
+  color: rgb(24,24,24);
+  border: 1px solid rgb(198,198,198);
+  background: #f7f7f7 linear-gradient(#f7f7f7, #f1f1f1);
+  box-shadow: 0 1px 2px rgba(0,0,0,.1);
+}
+.button_map:active {
+  color: rgb(51,51,51);
+  border: 1px solid rgb(204,204,204);
+  background: rgb(238,238,238) linear-gradient(rgb(238,238,238), rgb(224,224,224));
+  box-shadow: 0 1px 2px rgba(0,0,0,.1) inset;
+}
+.help-block{
+  color: #c9302c;
+  font-style: italic;
+  font-family: "Aleo Regular";
+}
