@@ -174,17 +174,6 @@ class SiteController extends Controller
 
 
     public function actionReviews(){
-            /*
-SELECT c.rewiew, c.date, u.name, u.phone
-FROM Comments c INNER JOIN Users u ON c.id_User = u.id;
-            */
-        
-//        $comment = Reviews::findOne(1);
-//        $user = $comment->user;
-//        
-//        $user = Users::findOne(1);
-//        $user->comments;
-
         
         $review = new Reviews();
         $comments = Reviews::find()->orderBy('date');

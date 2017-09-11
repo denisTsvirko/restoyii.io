@@ -54,7 +54,7 @@ class AdminController extends Controller{
             ],
         ];
     }
-    public function beforeAction(){
+    public function beforeAction($action){
         if(!yii::$app->user->can('viewAdminPage')){
             $this->layout = 'main';
             return $this->redirect(['/login-admin']);
@@ -136,6 +136,7 @@ class AdminController extends Controller{
         Yii::$app->session->setFlash('success', 'Successful delete event!');
         return $this->redirect(['/admin/event']);
     }
+
     public function actionUpdateEvent(){  //удалить событие из таблицы
         $id = $_GET['id'];
         $update = new UpdateEventForm();
