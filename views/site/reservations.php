@@ -4,6 +4,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use dosamigos\datepicker\DatePicker;
 $this->registerJsFile('@web/js/phone.js',['depends' => 'yii\web\YiiAsset']);
 $this->title = 'Reservations';
 $this->params['breadcrumbs'][] = $this->title;
@@ -69,6 +70,8 @@ $this->registerCss($css);
                     <label class="text_cent_reserver" >Date & Time - visit</label>
                     <div class="row">
                         <?= $form->field($reservation, 'date',['options' => ['class' => 'span2']])->label(false)->input('date', ['class' => 'span2'])?>
+
+
                         <?= $form->field($reservation, 'time',['options' => ['class' => 'span2']])->label(false)->input('time', ['class' => 'span2'])?>
                     </div>
 

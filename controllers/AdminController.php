@@ -266,9 +266,9 @@ class AdminController extends Controller{
                 Yii::$app->session->setFlash('error', 'Incorrect data!');
             }
         }
-        if(Yii::$app->request->get()){
+        /*if(Yii::$app->request->get()){
             $id = $_GET['id'];
-        }
+        }*/
 
         $LastEventSql = LastEvent::find();
         $lastevents = new yii\data\ActiveDataProvider([

@@ -176,7 +176,7 @@ class SiteController extends Controller
     public function actionReviews(){
         
         $review = new Reviews();
-        $comments = Reviews::find()->orderBy('date');
+        $comments = Reviews::find()->orderBy(['date'=>SORT_DESC]);
         $pages = new Pagination(['totalCount' => $comments->count(), 'pageSize' => 10]);
         $pages->pageSizeParam = false;
         $models = $comments->offset($pages->offset)
@@ -247,6 +247,7 @@ class SiteController extends Controller
                     $user->name = $reservation->name;
                     $user->email = $reservation->email;
                     $user->phone = $reservation->phone;
+                    $user->role = 'user';
                     $user->img = 'images/avatar.png';
                     $user->save();
                 }

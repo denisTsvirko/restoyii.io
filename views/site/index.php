@@ -33,7 +33,7 @@ CSS;
 $this->registerCss($css);
 ?>
 <section id="themenu">
-    <div id="flag_menu"><a id="flag_text" href="sections/menu.html">The Menu</a></div> <!--сделать ссылкой на страницу меню-->
+    <div id="flag_menu"><a id="flag_text" href="/menu">The Menu</a></div> <!--сделать ссылкой на страницу меню-->
     <div class="row">
 
         <div class="offset2 span4  left">
@@ -72,15 +72,19 @@ $this->registerCss($css);
 
 
 </section>
-<div class="conteiner_but">
-    <button  id="button_style" style="margin-top: 50px;">
-        <div class="mybutton">
-            load more
-            <div class="vert_line"></div>
-            <div class="gul"></div>
-        </div>
-    </button>
-</div>
+<?php
+    if(count($menu)>=8) {
+        echo '<div class="conteiner_but">
+            <button  id="button_style" style="margin-top: 50px;">
+                <div class="mybutton">
+                    load more
+                    <div class="vert_line"></div>
+                    <div class="gul"></div>
+                </div>
+            </button>
+        </div>';
+    }
+?>
 
 
 

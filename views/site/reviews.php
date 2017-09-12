@@ -119,7 +119,7 @@ JS
 
                                 <?php $form = ActiveForm::begin(['options' => ['class' => 'pjax-form']])?>
                                 <?= $form->field($review, 'review')->textarea(['rows' => 4,'class' =>'span8 marg_col', 'maxlength'=>250])->label('Your comment about the restaurant.') ?>
-                                <?= Html::submitButton('Reserve', ['class' => 'spoiler_links button_map']) ?>
+                                <?= Html::submitButton('Add review', ['class' => 'spoiler_links button_map']) ?>
                                 <?php ActiveForm::end() ?>
 
                             <?php Pjax::end() ?>
