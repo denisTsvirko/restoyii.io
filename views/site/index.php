@@ -173,9 +173,9 @@ $js = <<<JS
            $('.flexslider').flexslider({
              animation: "slide",
              animationLoop: false,
-             itemWidth: 230,
+             itemWidth: 255,
              itemMargin: 70,
-             pausePlay: true,
+            
              start: function(slider){
                //$('body').removeClass('loading');
              }
