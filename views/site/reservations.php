@@ -103,13 +103,13 @@ $this->registerCss($css);
                         <?= $form->field($reservation, 'numberTable',['options' => ['class' => 'span2']])->label(false)->dropDownList(
                             $massTables,
                             [
-                                'class' => 'span2 tabl',
+                                'class' => 'span2',
                                 'prompt' => 'Table'
                             ]); ?>
                     </div>
 
                     <label class="text_cent_reserver" >Events & Numbar of guests</label>
-                    <div class="row pad">
+                    <div class="row">
                         <?= $form->field($reservation, 'event',['options' => ['class' => 'span3']])->label(false)->dropDownList(
                             $massEvents,
                             [
@@ -160,12 +160,13 @@ $this->registerCss($css);
     var oldVal=0;
     $('#reservation-room').on('click',function() {
         var val = $('#reservation-room').val();
+        var date = $('#reservation-date').val();
         if((oldVal!=parseInt(val))&&(val!='')){
             oldVal = val;
-            console.log("new: "+val);
+            //console.log("new: "+val);
             $.ajax({
                 url:'/reservations',
-                data:{room: parseInt(val)},
+                data:{room: parseInt(val), date: date},
                 type:'POST',
                 datatype:'json',
                 success:function(res) {                

@@ -63,7 +63,10 @@ $this->title = 'Menu';
                             'delete'=>function ($url, $users) {
                                 $customurl=Yii::$app->getUrlManager()->createUrl(['/delete-menu','id'=>$users['id']]);
                                 return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-trash"></span>', $customurl,
-                                    ['title' => Yii::t('yii', 'Delete'), 'data-pjax' => '0']);
+                                    ['title' => Yii::t('yii', 'Delete'),
+                                        'data-pjax' => '0',
+                                        'data-confirm' => Yii::t('yii', 'Are you sure want to delete DISH from the menu?'),
+                                    ]);
                             }
                         ],
                     ],

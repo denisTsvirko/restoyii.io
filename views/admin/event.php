@@ -31,7 +31,10 @@ $this->title = 'Events';
                                 'delete'=>function ($url, $lastevents) {
                                     $customurl=Yii::$app->getUrlManager()->createUrl(['/delete-event','id'=>$lastevents['id']]);
                                     return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-trash"></span>', $customurl,
-                                        ['title' => Yii::t('yii', 'Delete'), 'data-pjax' => '0']);
+                                        ['title' => Yii::t('yii', 'Delete'),
+                                            'data-pjax' => '0',
+                                            'data-confirm' => Yii::t('yii', 'Are you sure want to delete TITLE: '.$lastevents['title'].'?'),
+                                        ]);
                                 },
                                 'update'=>function ($url, $lastevents) {
                                     $customurl=Yii::$app->getUrlManager()->createUrl(['/update-event','id'=>$lastevents['id']]);

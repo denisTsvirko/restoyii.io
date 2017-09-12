@@ -14,7 +14,7 @@ class Tables extends ActiveRecord{
         return 'Tables';
     }
 
-  /*  public function getRoom(){
+    /*public function getRoom(){
         return $this->hasMany(Rooms::className(), ['id' => 'id_Room']);
     }*/
     

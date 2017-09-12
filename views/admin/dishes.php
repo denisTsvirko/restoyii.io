@@ -40,7 +40,10 @@ $this->title = 'Dishes';
                             'delete'=>function ($url, $dishes) {
                                 $customurl=Yii::$app->getUrlManager()->createUrl(['/delete-dish','id'=>$dishes['id']]);
                                 return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-trash"></span>', $customurl,
-                                    ['title' => Yii::t('yii', 'Delete'), 'data-pjax' => '0']);
+                                    ['title' => Yii::t('yii', 'Delete'),
+                                        'data-pjax' => '0',
+                                        'data-confirm' => Yii::t('yii', 'Are you sure want to delete DISH: '.$dishes['name'].'?'),
+                                    ]);
                             },
                             'update'=>function ($url, $dishes) {
                                 $customurl=Yii::$app->getUrlManager()->createUrl(['/update-dish','id'=>$dishes['id']]);

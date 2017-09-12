@@ -261,6 +261,7 @@ class SiteController extends Controller
                     $reservation->id_Table = (int)$reservation->numberTable;
                     $reservation->id_Event = (int)$reservation->event;
                     $reservation->id_User = Users::findByEmail($reservation->email)->Id;
+                    $reservation->save();
 
                     Yii::$app->session->setFlash('success', 'Table reserved!');
                     return $this->refresh();
@@ -274,14 +275,25 @@ class SiteController extends Controller
         }
 
         if(\Yii::$app->request->isAjax){
-            $tables = Tables::find()->where('id_Room='.$_POST['room'])->all();
+            $date = date("Y-m-d", strtotime($_POST['date']));
+            $idRoom = $_POST['room'];
+
+            $subQuery = Tables::find()->select('Tables.id')
+            ->join('LEFT JOIN', 'Reservations', 'Reservations.id_Table = Tables.id')
+                ->where(' Reservations.date = :date ', ['date'=>$date])
+                ->column();
+            $tables = Tables::find()
+                ->where(['not', ['Tables.id' => $subQuery]])
+            ->andWhere('Tables.id_Room = :idRoom',['idRoom'=>$idRoom])->all();
+
             $massTables = ArrayHelper::map($tables, 'id', 'teble');
             return json_encode($massTables);
         }
         return $this->render('reservations',compact('reservation','massRooms','massEvents','massTables'));
     }
-    
 
+    /*SELECT * FROM Tables WHERE (`Tables`.id)
+        NOT IN( SELECT `Tables`.id FROM Tables JOIN Reservations ON Reservations.id_Table = Tables.id WHERE Reservations.date = '2017-09-23') AND Tables.id_Room = 4
 
-
+    SELECT * FROM Tables WHERE (`Tables`.id) NOT IN( SELECT `Tables`.id FROM Tables JOIN Reservations ON Reservations.id_Table = Tables.id WHERE Reservations.date = '2017-09-23') AND Tables.id_Room = 4*/
 }

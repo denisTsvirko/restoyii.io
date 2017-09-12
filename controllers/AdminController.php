@@ -125,6 +125,7 @@ class AdminController extends Controller{
         $model->delete();
 
         return $this->redirect(['/admin/index']);
+        //return $this->renderList();
     }
 
     public function actionDeleteEvent(){  //удалить событие из таблицы

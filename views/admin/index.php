@@ -36,9 +36,14 @@ $this->title = 'Adminka';
                                     'buttons'=>[
                                         'delete'=>function ($url, $users) {
                                             $customurl=Yii::$app->getUrlManager()->createUrl(['/delete-user','id'=>$users['id']]);
+
                                             return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-trash"></span>', $customurl,
-                                                ['title' => Yii::t('yii', 'Delete'), 'data-pjax' => '0']);
+                                                ['title' => Yii::t('yii', 'Delete'),
+                                                    'data-pjax' => '0',
+                                                    'data-confirm' => Yii::t('yii', 'Are you sure want to delete USER: '.$users['name'].'?'),
+                                                ]);
                                         }
+
                                     ],
                                 ],
                             ],
@@ -69,7 +74,10 @@ $this->title = 'Adminka';
                                         'delete'=>function ($url, $comments) {
                                             $customurl=Yii::$app->getUrlManager()->createUrl(['/delete-comment','id'=>$comments['id']]);
                                             return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-trash"></span>', $customurl,
-                                                ['title' => Yii::t('yii', 'Delete'), 'data-pjax' => '0']);
+                                                ['title' => Yii::t('yii', 'Delete'),
+                                                    'data-pjax' => '0',
+                                                    'data-confirm' => Yii::t('yii', 'Are you sure want to delete COMMENT?'),
+                                                ]);
                                         }
                                     ],
                                     
@@ -138,7 +146,10 @@ $this->title = 'Adminka';
                                         'delete'=>function ($url, $reservations) {
                                             $customurl=Yii::$app->getUrlManager()->createUrl(['/delete-reserv','id'=>$reservations['id']]);
                                             return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-trash"></span>', $customurl,
-                                                ['title' => Yii::t('yii', 'Delete'), 'data-pjax' => '0']);
+                                                ['title' => Yii::t('yii', 'Delete'),
+                                                    'data-pjax' => '0',
+                                                    'data-confirm' => Yii::t('yii', 'Are you sure want to delete RESERVE?'),
+                                                ]);
                                         }
                                     ],
 
