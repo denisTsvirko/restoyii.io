@@ -6,6 +6,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use dosamigos\datepicker\DatePicker;
 $this->registerJsFile('@web/js/phone.js',['depends' => 'yii\web\YiiAsset']);
+$this->registerJsFile('@web/js/time.js',['depends' => 'yii\web\YiiAsset']);
 $this->title = 'Reservations';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -14,6 +15,12 @@ $css = <<<CSS
     li{
       line-height: 5 !important;
     }
+   input[type='text'],
+   input[type='number']{
+        height: auto;
+   }
+   
+   
 CSS;
 $this->registerCss($css);
 ?>
@@ -68,15 +75,24 @@ $this->registerCss($css);
                     <?php $form = ActiveForm::begin()?>
 
                     <label class="text_cent_reserver" >Date & Time - visit</label>
-                    <div class="row">
-                        <?= $form->field($reservation, 'date',['options' => ['class' => 'span2']])->label(false)->input('date', ['class' => 'span2'])?>
+                    <div class="row pad">
+                        <?= $form->field($reservation, 'date',['options' => ['class' => 'span2']])->widget(
+                            DatePicker::className(), [
 
+                            'size' => 'sm',
+                            'options' => ['class' => 'form-control'],
+                            'clientOptions' => [
+                                'autoclose' => true,
+                                'format' => 'dd-mm-yyyy'
+                            ],
 
-                        <?= $form->field($reservation, 'time',['options' => ['class' => 'span2']])->label(false)->input('time', ['class' => 'span2'])?>
+                        ])->label(false)?>
+
+                        <?= $form->field($reservation, 'time',['options' => ['class' => 'span2']])->label(false)->input('text', ['class' => 'span2', 'maxlength'=>'5', 'minlength'=>'5','placeholder'=>'--:--' ])?>
                     </div>
 
                     <label class="text_cent_reserver" >Room & Number table</label>
-                    <div class="row">
+                    <div class="row pad">
                         <?= $form->field($reservation, 'room',['options' => ['class' => 'span2']])->label(false)->dropDownList(
                         $massRooms,
                         [
@@ -87,13 +103,13 @@ $this->registerCss($css);
                         <?= $form->field($reservation, 'numberTable',['options' => ['class' => 'span2']])->label(false)->dropDownList(
                             $massTables,
                             [
-                                'class' => 'span2',
+                                'class' => 'span2 tabl',
                                 'prompt' => 'Table'
                             ]); ?>
                     </div>
 
                     <label class="text_cent_reserver" >Events & Numbar of guests</label>
-                    <div class="row">
+                    <div class="row pad">
                         <?= $form->field($reservation, 'event',['options' => ['class' => 'span3']])->label(false)->dropDownList(
                             $massEvents,
                             [
@@ -130,7 +146,7 @@ $this->registerCss($css);
                             <?php echo Yii::$app->session->getFlash('error');?>
                         </div>
                     <?php endif; ?>
-                    
+
                 </div>
             </div>
 

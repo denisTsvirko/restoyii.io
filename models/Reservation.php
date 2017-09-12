@@ -81,14 +81,16 @@ class Reservation extends ActiveRecord{
         return [
             [['date','time','room','numberTable','event','numguests','name','phone','offers','email'], 'required'],
             ['email','email'],
+            ['time','string', 'min'=>5],
             ['numguests', 'string', 'max'=>45],
             ['date','dateRule'],
         ];
     }
 
     public function dateRule($attr){
-        $serverdata = date("d.m.Y");
-        if(strtotime($serverdata)>strtotime($this->$attr)){
+        $serverdate = date("d-m-Y");
+
+        if(strtotime($serverdate)>strtotime($this->$attr)){
             //$this->addError($attr,'server date: '.strtotime($serverdata).' main date:'. strtotime($this->$attr));
             $this->addError('Old date!');
         }

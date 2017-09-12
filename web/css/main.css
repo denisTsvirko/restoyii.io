@@ -988,6 +988,22 @@ line-height: 25px;
    width: 50%;
 
 }
+.tabl{
+  max-width: 157px;
+}
+
+@media screen and (max-width: 1224px) {
+  .tabl{
+    max-width: 127px;
+  }
+
+}
+/*@media screen and (max-width: 1167px) {
+  .tabl{
+    max-width: 96px;
+  }
+
+}*/
 
 @media screen and (max-width: 1200px) {
   .container_head_t{
@@ -1037,6 +1053,18 @@ line-height: 25px;
   #left_column img {
     max-width: 320px;
   }
+  /*.marg_col{
+    max-width: 198px;
+  }*/
+}
+@media screen and (max-width: 950px) {
+  .pad{
+    padding-right: 15px;
+  }
+  .tabl{
+    max-width: 100%;
+  }
+
   /*.marg_col{
     max-width: 198px;
   }*/

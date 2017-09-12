@@ -256,11 +256,11 @@ class SiteController extends Controller
                     'id_Table' => $reservation->numberTable,
                 ])->all()
                 ) {
+                    $reservation->date = date("Y-m-d", strtotime($reservation->date));
+                    $reservation->time = date("H:i", strtotime($reservation->time));
                     $reservation->id_Table = (int)$reservation->numberTable;
                     $reservation->id_Event = (int)$reservation->event;
                     $reservation->id_User = Users::findByEmail($reservation->email)->Id;
-
-                    $reservation->save();
 
                     Yii::$app->session->setFlash('success', 'Table reserved!');
                     return $this->refresh();
@@ -268,7 +268,7 @@ class SiteController extends Controller
                     Yii::$app->session->setFlash('error', 'The table is withdrawn!');
                 }
             }else{
-                Yii::$app->session->setFlash('error', 'Incorrect data!');
+                Yii::$app->session->setFlash('error', 'Old date!');
             }
 
         }
