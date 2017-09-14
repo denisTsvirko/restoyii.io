@@ -61,7 +61,7 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 '<action:(our-story|menu|contact|events|reservations|reviews|login-user|get-img|login-admin|index-add)>' => 'site/<action>',
-                '<action:(index|event|dishes|admin-menu|delete-comment|delete-user|delete-reserv|delete-event|update-event|delete-dish|update-dish|delete-menu|add-menu)>' => 'admin/<action>',
+                '<action:(index|event|dishes|admin-menu|delete-comment|delete-user|delete-reserv|delete-event|update-event|delete-dish|update-dish|delete-menu|add-menu|delete-paid|add-paid)>' => 'admin/<action>',
             ],
         ],
 

@@ -7,6 +7,7 @@ use app\models\CallForm;
 use app\models\ContactForm;
 use app\models\Dishes;
 use app\models\LastEvent;
+use app\models\PendingPayment;
 use app\models\Reservation;
 use app\models\Reviews;
 use app\models\Rooms;
@@ -263,6 +264,13 @@ class SiteController extends Controller
                     $reservation->id_Event = (int)$reservation->event;
                     $reservation->id_User = Users::findByEmail($reservation->email)->Id;
                     $reservation->save();
+
+                    $paiments = new PendingPayment();
+                    $paiments->id_Reservation = $reservation->id;
+                    $paiments->date_start = date("Y-m-d");
+                    $paiments->date_end = date('Y-m-d', strtotime("+5 days"));
+                    $paiments->save();
+
 
                     Yii::$app->session->setFlash('success', 'Table reserved!');
                     return $this->refresh();

@@ -16,6 +16,7 @@ use app\models\admin\UpdateDishForm;
 use app\models\Imgs;
 use app\models\LastEvent;
 use app\models\Menu;
+use app\models\PendingPayment;
 use yii;
 use yii\web\Controller;
 use yii\filters\AccessControl;
@@ -89,10 +90,21 @@ class AdminController extends Controller{
         $reservations = new yii\data\ActiveDataProvider([
             'query' => $reservationsSql,
             'pagination' => [
-                'pageSize' => 15,
+                'pageSize' => 10,
             ],
             'sort' => [
                 'attributes' => ['id', 'date'],
+            ],
+        ]);
+
+        $paymentSql = PendingPayment::find();
+        $payments = new yii\data\ActiveDataProvider([
+            'query' => $paymentSql,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+            'sort' => [
+                'attributes' => ['id', 'date_start', 'date_end'],
             ],
         ]);
 
@@ -101,6 +113,7 @@ class AdminController extends Controller{
             'users'=>$users,
             'comments'=>$comments,
             'reservations'=>$reservations,
+            'payments'=>$payments,
         ]);
     }
 
@@ -111,10 +124,34 @@ class AdminController extends Controller{
     }
 
     public function actionDeleteReserv(){
-        $model = Reservation::find()->where(['id' => $_GET['id']])->one();
+
+        $id = $_GET['id'];
+        $model = Reservation::find()->where(['id' => $id])->one();
+        $model->beforeDelete(PendingPayment::deleteAll(['id_Reservation' => $id]));
         $model->delete();
         return $this->redirect(['/admin/index']);
     }
+
+    public function actionDeletePaid(){
+
+        $id = $_GET['id'];
+        $model = PendingPayment::find()->where(['id' => $id])->one();
+        $id_reserv = $model->id_Reservation;
+        $model->delete();
+
+        $reserv = Reservation::find()->where(['id' => $id_reserv])->one();
+        $reserv->delete();
+
+        return $this->redirect(['/admin/index']);
+    }
+    public function actionAddPaid(){
+
+        $id = $_GET['id'];
+        $model = PendingPayment::find()->where(['id' => $id])->one();
+        $model->delete();
+        return $this->redirect(['/admin/index']);
+    }
+
 
     public function actionDeleteUser(){
         $id = $_GET['id'];

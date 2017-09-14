@@ -160,6 +160,60 @@ $this->title = 'Adminka';
 
                         ?>
                         <?php Pjax::end() ?>
+
+                        <h2>Pending payment</h2>
+
+                        <?php Pjax::begin()?>
+                        <?php
+                        echo GridView::widget([
+                            'dataProvider' => $payments,
+                            'columns' => [
+                                ['class' => 'yii\grid\SerialColumn'],
+                                'id',
+                                'id_Reservation',
+                                'date_start',
+                                'date_end',
+                                [
+                                    'attribute'=>'Status',
+                                    'content'=>function($payments){
+                                        $date =  date("Y-m-d");
+                                        if($payments['date_end']>=$date){
+                                            return 'Pending payment';
+                                        }
+                                        return 'Payment is past due';
+
+                                    }
+                                ],
+                                [
+                                    'class' => 'yii\grid\ActionColumn',
+                                    'headerOptions' => ['width' => '25'],
+                                    'template' => '{paid}{delete}',
+                                    'buttons'=>[
+                                        'delete'=>function ($url, $payments) {
+                                            $customurl=Yii::$app->getUrlManager()->createUrl(['/delete-paid','id'=>$payments['id']]);
+                                            return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-trash"></span>', $customurl,
+                                                ['title' => Yii::t('yii', 'Delete'),
+                                                    'data-pjax' => '0',
+                                                    'data-confirm' => Yii::t('yii', 'Are you sure want to delete RESERVE?'),
+                                                ]);
+                                        },
+                                        'paid'=>function ($url, $dishes) {
+                                            $customurl=Yii::$app->getUrlManager()->createUrl(['/add-paid','id'=>$dishes['id']]);
+                                            return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-ok"></span>', $customurl,
+                                                ['title' => Yii::t('yii', 'Paid'),
+                                                    'data-pjax' => '0',
+                                                    'data-confirm' => Yii::t('yii', 'You are sure that the table is paid?'),
+                                                ]);
+                                        },
+                                    ],
+
+                                ],
+
+                            ],
+                        ]);
+
+                        ?>
+                        <?php Pjax::end() ?>
                     </div>
                 </div>
             </div>
