@@ -52,12 +52,6 @@ use yii\captcha\Captcha;
                 <?= $form->field($model, 'phone') ?>
                 
 
-<!--                --><?//= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
-//                    'template' => '<div class="row" style="display: flex; align-items: center; flex-wrap: wrap;">
-//                                        <div class="span4">{input}</div>
-//                                        <div class="span2">{image}</div>
-//                                   </div>',
-//                ]) ?>
                 <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
                                     'template' => '                                      
                                                        {input}

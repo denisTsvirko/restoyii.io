@@ -24,18 +24,27 @@ $css = <<<CSS
 CSS;
 $this->registerCss($css);
 ?>
+
+
 <section id="content_reserv">
     <div class="row">
         <div class="offset1 span13">
 
-            <div class="container_reserv">
-                <div class="item_reserv">
+            <div class="container_reserv ">
+                <div class="item_reserv midle">
                     <div class="text_item"> MAIN - Hall</div>
-                    <img  src="../images/etag.jpg" >
+                    <br>
+
+
+                    <img id="main_hall" src='../images/main_hall.php' alt='' />
+
                 </div>
-                <div class="item_reserv">
+                <div class="item_reserv vip" >
                     <div class="text_item"> VIP - Hall</div>
-                    <img  src="../images/vip.jpg" >
+                    <br>
+
+                    <img id="vip_hall" src='../images/vip_hall.php'  alt='' />
+
                 </div>
             </div>
 
@@ -100,10 +109,10 @@ $this->registerCss($css);
                             'class' => 'span2',
                         ]
                         ); ?>
-                        <?= $form->field($reservation, 'numberTable',['options' => ['class' => 'span2']])->label(false)->dropDownList(
+                        <?= $form->field($reservation, 'numberTable',['options' => ['class' => 'span2 ']])->label(false)->dropDownList(
                             $massTables,
                             [
-                                'class' => 'span2',
+                                'class' => 'span2 tabl',
                                 'prompt' => 'Table'
                             ]); ?>
                     </div>
@@ -157,12 +166,42 @@ $this->registerCss($css);
 
 <?php
     $js = <<<JS
+    
+    $(document).ready(function(){
     var oldVal=0;
+    
+    var oldDate='';
+    $('#reservation-date, span').on('click',function() {
+        var date = $('#reservation-date').val();
+        if(oldDate!=date){
+            oldDate = date;
+            
+           // $('#reservation-room :first').attr("selected", "selected");
+           // $('#reservation-numbertable :first').attr("selected", "selected");
+          //  console.log( $('#reservation-numbertable'));
+            
+            $('#reservation-room option:selected').each(function(){
+                 this.selected=false;
+            });
+            $('#reservation-numbertable option:selected').each(function(){
+                 this.selected=false;
+            });
+            
+            $('#reservation-numbertable option').slice(1).remove();  
+            
+            $('#reservation-room ').attr("aria-invalid","false");
+        } 
+        
+        
+
+
+ 
+    });
+    
     $('#reservation-room').on('click',function() {
         var val = $('#reservation-room').val();
         var date = $('#reservation-date').val();
-        if((oldVal!=parseInt(val))&&(val!='')){
-            oldVal = val;
+      
             //console.log("new: "+val);
             $.ajax({
                 url:'/reservations',
@@ -170,23 +209,33 @@ $this->registerCss($css);
                 type:'POST',
                 datatype:'json',
                 success:function(res) {                
-                    addTables(JSON.parse(res));
+                    addTables(JSON.parse(res, val));
                 },
                 error:function() {
                 alert('Error!');
                 }
             });
             
-        }
+        
+        
+        
         function addTables(res) {    
-            $('#reservation-numbertable option').slice(1).remove();
+            $('#reservation-numbertable option').slice(1).remove();           
+            
+            $('#main_hall').remove();
+            $('.midle').append('<img id="main_hall" src="../images/main_hall.php?'+Math.random()+'" alt="" />'); 
+            
+            $('#vip_hall').remove();
+            $('.vip').append('<img id="vip_hall" src="../images/vip_hall.php?'+Math.random()+'" alt="" />');
              
             for(k in res) { 
                 str = k+": "+ res[k]; 
                 $('#reservation-numbertable').append("<option value='"+k+"'>"+res[k]+"</option>");
-            }        
+            }    
+
         }
 
+    });
     });
 JS;
 $this->registerJs($js);

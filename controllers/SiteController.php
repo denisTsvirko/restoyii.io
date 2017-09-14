@@ -22,6 +22,7 @@ use yii\web\Controller;
 use yii\helpers\ArrayHelper;
 use yii\data\Pagination;
 use yii\data\ActiveDataProvider;
+use app\classes\WriteImg;
 
 
 
@@ -286,7 +287,20 @@ class SiteController extends Controller
                 ->where(['not', ['Tables.id' => $subQuery]])
             ->andWhere('Tables.id_Room = :idRoom',['idRoom'=>$idRoom])->all();
 
+
+
             $massTables = ArrayHelper::map($tables, 'id', 'teble');
+
+            $writeImg = new WriteImg($massTables);
+
+            if($idRoom==4) {
+                $writeImg->crateImg(1);
+              //  $writeImg->updateImgMain();
+            }else{
+                $writeImg->crateImg(2);
+              //  $writeImg->updateImgVip();
+            }
+
             return json_encode($massTables);
         }
         return $this->render('reservations',compact('reservation','massRooms','massEvents','massTables'));

@@ -808,7 +808,7 @@ nav label:hover{
 	overflow: hidden;
   display: flex;
 	flex-wrap: wrap;
-	justify-content: space-between;
+	justify-content: space-around;
 }
 .container_form_resv{
   max-width: 1100px;
@@ -827,7 +827,7 @@ nav label:hover{
 	margin: 10px 0;
 }
 .item_reserv img{
-  width: 100%;
+  width: 450px;
 }
 .text_item{
   text-align: center;
@@ -991,10 +991,16 @@ line-height: 25px;
 .tabl{
   max-width: 157px;
 }
+.img_seat{
+  width: 50px;
+}
+.row{
+  margin-right: 0px;
+}
 
 @media screen and (max-width: 1224px) {
   .tabl{
-    max-width: 127px;
+   /* max-width: 127px;*/
   }
 
 }
@@ -1058,9 +1064,9 @@ line-height: 25px;
   }*/
 }
 @media screen and (max-width: 950px) {
-  .pad{
+  /*.pad{
     padding-right: 15px;
-  }
+  }*/
   .tabl{
     max-width: 100%;
   }
