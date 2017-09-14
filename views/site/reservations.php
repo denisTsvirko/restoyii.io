@@ -201,6 +201,8 @@ $this->registerCss($css);
     $('#reservation-room').on('click',function() {
         var val = $('#reservation-room').val();
         var date = $('#reservation-date').val();
+        
+        if(val!=''){
       
             //console.log("new: "+val);
             $.ajax({
@@ -215,6 +217,7 @@ $this->registerCss($css);
                 alert('Error!');
                 }
             });
+            }
             
         
         

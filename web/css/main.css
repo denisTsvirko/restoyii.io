@@ -41,6 +41,11 @@
 .modal.fade {
   top: -50%;
 }
+
+.midle{
+  min-height: 259px;
+}
+
 .info_auto{
   font-family: "Aleo Regular";
   font-size: 16px;
