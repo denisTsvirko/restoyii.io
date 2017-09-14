@@ -35,6 +35,7 @@ $this->registerCss($css);
                     <div class="text_item"> MAIN - Hall</div>
                     <br>
 
+                    <img class="load_hall" src='../images/loading_animation.gif'  alt='' />
 
                     <img id="main_hall" src='../images/main_hall.php' alt='' />
 
@@ -42,6 +43,7 @@ $this->registerCss($css);
                 <div class="item_reserv vip" >
                     <div class="text_item"> VIP - Hall</div>
                     <br>
+                    <img class="load_hall" src='../images/loading_animation.gif'  alt='' />
 
                     <img id="vip_hall" src='../images/vip_hall.php'  alt='' />
 
@@ -203,7 +205,9 @@ $this->registerCss($css);
         var date = $('#reservation-date').val();
         
         if(val!=''){
-      
+          $('.load_hall').css('display','block');
+           $('#main_hall').remove();
+             $('#vip_hall').remove();
             //console.log("new: "+val);
             $.ajax({
                 url:'/reservations',
@@ -222,19 +226,22 @@ $this->registerCss($css);
         
         
         
-        function addTables(res) {    
+        function addTables(res) {   
+            
             $('#reservation-numbertable option').slice(1).remove();           
             
-            $('#main_hall').remove();
+           
             $('.midle').append('<img id="main_hall" src="../images/main_hall.php?'+Math.random()+'" alt="" />'); 
             
-            $('#vip_hall').remove();
+          
             $('.vip').append('<img id="vip_hall" src="../images/vip_hall.php?'+Math.random()+'" alt="" />');
              
             for(k in res) { 
                 str = k+": "+ res[k]; 
                 $('#reservation-numbertable').append("<option value='"+k+"'>"+res[k]+"</option>");
             }    
+            
+            $('.load_hall').css('display','none');
 
         }
 

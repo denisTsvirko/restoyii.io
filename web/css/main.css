@@ -45,7 +45,10 @@
 .midle{
   min-height: 259px;
 }
-
+.load_hall{
+  max-width: 200px;
+  display: none;
+}
 .info_auto{
   font-family: "Aleo Regular";
   font-size: 16px;
