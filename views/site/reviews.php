@@ -32,14 +32,6 @@ $this->registerCss($css);
                 <div class="tab-content" style="overflow:  hidden;">
                     <div class="tab-pane active" id="tab1">
                         <div class="container">
-
-                            <?php Pjax::begin([
-                                'id' => 'list-messages',
-//                                'timeout' => 3000,
-//                                'enablePushState' => false,
-//                                'linkSelector' => false,
-                                'formSelector' => '.pjax-form'
-                            ]) ?>
                             <?php
                                     // проходим цикл по данным модели, тут упрощённо, у вас может быть сложнее html-оформление
                                     /** @var Reviews $model */
@@ -68,16 +60,6 @@ $this->registerCss($css);
                                     'registerLinkTags' => true,
                                 ]);
                             ?>
-                            <?php Pjax::end(); ?>
-
-                            <?php $this->registerJs(<<<JS
-function updateList() {
-  $.pjax.reload({container: '#list-messages'});
-}
-setInterval(updateList, 1000);
-JS
-                            ) ?>
-
 
                             <div class="clearfix"></div>
 
