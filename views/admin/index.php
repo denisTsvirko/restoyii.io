@@ -1,6 +1,8 @@
 <?php
+
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
 $this->title = 'Adminka';
 ?>
 
@@ -10,13 +12,13 @@ $this->title = 'Adminka';
             <div class="table">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#tab1" data-toggle="tab">Users</a></li>
-                    <li ><a href="#tab2" data-toggle="tab">Comments</a></li>
-                    <li ><a href="#tab3" data-toggle="tab">Reservations</a></li>
+                    <li><a href="#tab2" data-toggle="tab">Comments</a></li>
+                    <li><a href="#tab3" data-toggle="tab">Reservations</a></li>
                 </ul>
                 <div class="tab-content" style="overflow:  hidden;">
                     <div class="tab-pane active" id="tab1">
                         <br>
-                        <?php Pjax::begin()?>
+                        <?php Pjax::begin() ?>
                         <?php
                         echo GridView::widget([
                             'dataProvider' => $users,
@@ -33,14 +35,14 @@ $this->title = 'Adminka';
                                     'class' => 'yii\grid\ActionColumn',
                                     'headerOptions' => ['width' => '25'],
                                     'template' => '{delete}',
-                                    'buttons'=>[
-                                        'delete'=>function ($url, $users) {
-                                            $customurl=Yii::$app->getUrlManager()->createUrl(['/delete-user','id'=>$users['id']]);
+                                    'buttons' => [
+                                        'delete' => function ($url, $users) {
+                                            $customurl = Yii::$app->getUrlManager()->createUrl(['/delete-user', 'id' => $users['id']]);
 
-                                            return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-trash"></span>', $customurl,
+                                            return \yii\helpers\Html::a('<span class="glyphicon glyphicon-trash"></span>', $customurl,
                                                 ['title' => Yii::t('yii', 'Delete'),
                                                     'data-pjax' => '0',
-                                                    'data-confirm' => Yii::t('yii', 'Are you sure want to delete USER: '.$users['name'].'?'),
+                                                    'data-confirm' => Yii::t('yii', 'Are you sure want to delete USER: ' . $users['name'] . '?'),
                                                 ]);
                                         }
 
@@ -48,14 +50,14 @@ $this->title = 'Adminka';
                                 ],
                             ],
                         ]);
-                        
+
                         ?>
                         <?php Pjax::end() ?>
-                        
+
                     </div>
                     <div class="tab-pane " id="tab2">
                         <br>
-                        <?php Pjax::begin()?>
+                        <?php Pjax::begin() ?>
                         <?php
                         echo GridView::widget([
                             'dataProvider' => $comments,
@@ -70,17 +72,17 @@ $this->title = 'Adminka';
                                     'class' => 'yii\grid\ActionColumn',
                                     'headerOptions' => ['width' => '25'],
                                     'template' => '{delete}',
-                                    'buttons'=>[
-                                        'delete'=>function ($url, $comments) {
-                                            $customurl=Yii::$app->getUrlManager()->createUrl(['/delete-comment','id'=>$comments['id']]);
-                                            return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-trash"></span>', $customurl,
+                                    'buttons' => [
+                                        'delete' => function ($url, $comments) {
+                                            $customurl = Yii::$app->getUrlManager()->createUrl(['/delete-comment', 'id' => $comments['id']]);
+                                            return \yii\helpers\Html::a('<span class="glyphicon glyphicon-trash"></span>', $customurl,
                                                 ['title' => Yii::t('yii', 'Delete'),
                                                     'data-pjax' => '0',
                                                     'data-confirm' => Yii::t('yii', 'Are you sure want to delete COMMENT?'),
                                                 ]);
                                         }
                                     ],
-                                    
+
                                 ],
 
                             ],
@@ -91,7 +93,7 @@ $this->title = 'Adminka';
                     </div>
                     <div class="tab-pane " id="tab3">
                         <br>
-                        <?php Pjax::begin()?>
+                        <?php Pjax::begin() ?>
                         <?php
                         echo GridView::widget([
                             'dataProvider' => $reservations,
@@ -103,38 +105,38 @@ $this->title = 'Adminka';
                                 'numguests',
                                 'offers',
                                 [
-                                    'attribute'=>'User_name',
-                                    'content'=>function($reservations){
+                                    'attribute' => 'User_name',
+                                    'content' => function ($reservations) {
                                         return $reservations->user->name;
                                     }
                                 ],
                                 [
-                                    'attribute'=>'User_phone',
-                                    'content'=>function($reservations){
+                                    'attribute' => 'User_phone',
+                                    'content' => function ($reservations) {
                                         return $reservations->user->phone;
                                     }
                                 ],
                                 [
-                                    'attribute'=>'Event',
-                                    'content'=>function($reservations){
+                                    'attribute' => 'Event',
+                                    'content' => function ($reservations) {
                                         return $reservations->evt->event;
                                     }
                                 ],
                                 [
-                                    'attribute'=>'Table',
-                                    'content'=>function($reservations){
+                                    'attribute' => 'Table',
+                                    'content' => function ($reservations) {
                                         return $reservations->table->teble;
                                     }
                                 ],
                                 [
-                                    'attribute'=>'Site',
-                                    'content'=>function($reservations){
+                                    'attribute' => 'Site',
+                                    'content' => function ($reservations) {
                                         return $reservations->table->site;
                                     }
                                 ],
                                 [
-                                    'attribute'=>'Hall',
-                                    'content'=>function($reservations){
+                                    'attribute' => 'Hall',
+                                    'content' => function ($reservations) {
                                         return $reservations->rm->hall;
                                     }
                                 ],
@@ -142,10 +144,10 @@ $this->title = 'Adminka';
                                     'class' => 'yii\grid\ActionColumn',
                                     'headerOptions' => ['width' => '25'],
                                     'template' => '{delete}',
-                                    'buttons'=>[
-                                        'delete'=>function ($url, $reservations) {
-                                            $customurl=Yii::$app->getUrlManager()->createUrl(['/delete-reserv','id'=>$reservations['id']]);
-                                            return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-trash"></span>', $customurl,
+                                    'buttons' => [
+                                        'delete' => function ($url, $reservations) {
+                                            $customurl = Yii::$app->getUrlManager()->createUrl(['/delete-reserv', 'id' => $reservations['id']]);
+                                            return \yii\helpers\Html::a('<span class="glyphicon glyphicon-trash"></span>', $customurl,
                                                 ['title' => Yii::t('yii', 'Delete'),
                                                     'data-pjax' => '0',
                                                     'data-confirm' => Yii::t('yii', 'Are you sure want to delete RESERVE?'),
@@ -163,7 +165,7 @@ $this->title = 'Adminka';
 
                         <h2>Pending payment</h2>
 
-                        <?php Pjax::begin()?>
+                        <?php Pjax::begin() ?>
                         <?php
                         echo GridView::widget([
                             'dataProvider' => $payments,
@@ -174,10 +176,10 @@ $this->title = 'Adminka';
                                 'date_start',
                                 'date_end',
                                 [
-                                    'attribute'=>'Status',
-                                    'content'=>function($payments){
-                                        $date =  date("Y-m-d");
-                                        if($payments['date_end']>=$date){
+                                    'attribute' => 'Status',
+                                    'content' => function ($payments) {
+                                        $date = date("Y-m-d");
+                                        if ($payments['date_end'] >= $date) {
                                             return 'Pending payment';
                                         }
                                         return 'Payment is past due';
@@ -188,18 +190,18 @@ $this->title = 'Adminka';
                                     'class' => 'yii\grid\ActionColumn',
                                     'headerOptions' => ['width' => '25'],
                                     'template' => '{paid}{delete}',
-                                    'buttons'=>[
-                                        'delete'=>function ($url, $payments) {
-                                            $customurl=Yii::$app->getUrlManager()->createUrl(['/delete-paid','id'=>$payments['id']]);
-                                            return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-trash"></span>', $customurl,
+                                    'buttons' => [
+                                        'delete' => function ($url, $payments) {
+                                            $customurl = Yii::$app->getUrlManager()->createUrl(['/delete-paid', 'id' => $payments['id']]);
+                                            return \yii\helpers\Html::a('<span class="glyphicon glyphicon-trash"></span>', $customurl,
                                                 ['title' => Yii::t('yii', 'Delete'),
                                                     'data-pjax' => '0',
                                                     'data-confirm' => Yii::t('yii', 'Are you sure want to delete RESERVE?'),
                                                 ]);
                                         },
-                                        'paid'=>function ($url, $dishes) {
-                                            $customurl=Yii::$app->getUrlManager()->createUrl(['/add-paid','id'=>$dishes['id']]);
-                                            return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-ok"></span>', $customurl,
+                                        'paid' => function ($url, $dishes) {
+                                            $customurl = Yii::$app->getUrlManager()->createUrl(['/add-paid', 'id' => $dishes['id']]);
+                                            return \yii\helpers\Html::a('<span class="glyphicon glyphicon-ok"></span>', $customurl,
                                                 ['title' => Yii::t('yii', 'Paid'),
                                                     'data-pjax' => '0',
                                                     'data-confirm' => Yii::t('yii', 'You are sure that the table is paid?'),

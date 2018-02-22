@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: alpo4ino
- * Date: 14.09.17
- * Time: 15:14
- */
 
 namespace app\models;
 
@@ -17,5 +11,4 @@ class PendingPayment extends ActiveRecord
     {
         return 'Pending_Payment';
     }
-
 }

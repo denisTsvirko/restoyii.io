@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Alpo4
- * Date: 01.09.2017
- * Time: 10:52
- */
 
 namespace app\models;
 
@@ -22,5 +16,4 @@ class Menu extends ActiveRecord
     {
         return $this->hasMany(DishesMenu::className(), ['id_Menu' => 'id']);
     }
-
 }

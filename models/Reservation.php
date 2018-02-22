@@ -1,13 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Alpo4
- * Date: 17.08.2017
- * Time: 9:10
- */
 
 namespace app\models;
+
 use yii\db\ActiveRecord;
+
 /**
  * Class Reservation
  *
@@ -19,20 +15,17 @@ use yii\db\ActiveRecord;
  * @property Rooms $rm
  *
  */
-class Reservation extends ActiveRecord{
-
-//    public $date;
-//    public $time;
+class Reservation extends ActiveRecord
+{
     public $room;
     public $numberTable;
-   public $event;
-   // public $numberGuests;
+    public $event;
     public $name;
     public $phone;
     public $email;
-   // public $offers;
 
-    public static function tableName(){
+    public static function tableName()
+    {
         return 'Reservations';
     }
 
@@ -41,7 +34,8 @@ class Reservation extends ActiveRecord{
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getUser(){
+    public function getUser()
+    {
         return $this->hasOne(Users::className(), ['id' => 'id_User']);
     }
 
@@ -50,51 +44,55 @@ class Reservation extends ActiveRecord{
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getTable(){
-        return $this->hasOne(Tables::className(), ['id'=>'id_Table']);
+    public function getTable()
+    {
+        return $this->hasOne(Tables::className(), ['id' => 'id_Table']);
     }
+
     /**
      * Returns evt related record
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getEvt(){
-        return $this->hasOne(Events::className(), ['id'=>'id_Event']);
+    public function getEvt()
+    {
+        return $this->hasOne(Events::className(), ['id' => 'id_Event']);
     }
+
     /**
      * Returns room related record
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getRm(){
-        return $this->hasOne(Rooms::className(), ['id'=>'id_Room'])->viaTable('Tables', ['id' => 'id_Table']);
+    public function getRm()
+    {
+        return $this->hasOne(Rooms::className(), ['id' => 'id_Room'])->viaTable('Tables', ['id' => 'id_Table']);
     }
 
 
-    public function attributeLabels(){
+    public function attributeLabels()
+    {
         return [
-            'email'=>'E-mail',
+            'email' => 'E-mail',
         ];
     }
 
-    public function rules(){
+    public function rules()
+    {
         return [
-            [['date','time','room','numberTable','event','numguests','name','phone','offers','email'], 'required'],
-            ['email','email'],
-            ['time','string', 'min'=>5],
-            ['numguests', 'string', 'max'=>45],
-            ['date','dateRule'],
+            [['date', 'time', 'room', 'numberTable', 'event', 'numguests', 'name', 'phone', 'offers', 'email'], 'required'],
+            ['email', 'email'],
+            ['time', 'string', 'min' => 5],
+            ['numguests', 'string', 'max' => 45],
+            ['date', 'dateRule'],
         ];
     }
 
-    public function dateRule($attr){
+    public function dateRule($attr)
+    {
         $serverdate = date("d-m-Y");
-
-        if(strtotime($serverdate)>strtotime($this->$attr)){
-            //$this->addError($attr,'server date: '.strtotime($serverdata).' main date:'. strtotime($this->$attr));
+        if (strtotime($serverdate) > strtotime($this->$attr)) {
             $this->addError('Old date!');
         }
     }
-
-
 }

@@ -1,7 +1,9 @@
 <?php
 
 /* @var $this \yii\web\View */
+
 /* @var $content string */
+
 use app\components\HeaderMenu;
 use app\components\Footer;
 use app\components\BigImg;
@@ -22,7 +24,7 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -34,7 +36,7 @@ AppAsset::register($this);
 
 <div class="wrap">
     <?php echo HeaderMenu::widget(); ?>
-    
+
 </div>
 
 <?php echo BigImg::widget(); ?>

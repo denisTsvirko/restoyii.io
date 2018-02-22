@@ -1,14 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Alpo4
- * Date: 28.08.2017
- * Time: 14:38
- */
 
 namespace app\controllers;
-
-
 
 use app\models\admin\AddDishForm;
 use app\models\admin\AddMenuForm;
@@ -33,11 +25,9 @@ use yii\web\UploadedFile;
 use app\models\DishesMenu;
 use yii\helpers\ArrayHelper;
 
-
-class AdminController extends Controller{
-
+class AdminController extends Controller
+{
     public $layout = 'main-admin';
-
 
     public function behaviors()
     {
@@ -55,15 +45,19 @@ class AdminController extends Controller{
             ],
         ];
     }
-    public function beforeAction($action){
-        if(!yii::$app->user->can('viewAdminPage')){
+
+    public function beforeAction($action)
+    {
+        if (!yii::$app->user->can('viewAdminPage')) {
             $this->layout = 'main';
             return $this->redirect(['/login-admin']);
         }
+        
         return $this->actionIndex();
     }
 
-    public function actionIndex(){
+    public function actionIndex()
+    {
         $usersSql = Users::find()->asArray()->all();
         $users = new ArrayDataProvider([
             'allModels' => $usersSql,
@@ -86,7 +80,7 @@ class AdminController extends Controller{
             ],
         ]);
 
-        $reservationsSql = Reservation::find()->with('evt','table','rm');
+        $reservationsSql = Reservation::find()->with('evt', 'table', 'rm');
         $reservations = new yii\data\ActiveDataProvider([
             'query' => $reservationsSql,
             'pagination' => [
@@ -107,33 +101,35 @@ class AdminController extends Controller{
                 'attributes' => ['id', 'date_start', 'date_end'],
             ],
         ]);
-
-
-        return $this->render('index',[
-            'users'=>$users,
-            'comments'=>$comments,
-            'reservations'=>$reservations,
-            'payments'=>$payments,
+        
+        return $this->render('index', [
+            'users' => $users,
+            'comments' => $comments,
+            'reservations' => $reservations,
+            'payments' => $payments,
         ]);
     }
 
-    public function actionDeleteComment(){
+    public function actionDeleteComment()
+    {
         $model = Reviews::find()->where(['id' => $_GET['id']])->one();
         $model->delete();
+        
         return $this->redirect(['/admin/index']);
     }
 
-    public function actionDeleteReserv(){
-
+    public function actionDeleteReserv()
+    {
         $id = $_GET['id'];
         $model = Reservation::find()->where(['id' => $id])->one();
         $model->beforeDelete(PendingPayment::deleteAll(['id_Reservation' => $id]));
         $model->delete();
+        
         return $this->redirect(['/admin/index']);
     }
 
-    public function actionDeletePaid(){
-
+    public function actionDeletePaid()
+    {
         $id = $_GET['id'];
         $model = PendingPayment::find()->where(['id' => $id])->one();
         $id_reserv = $model->id_Reservation;
@@ -144,16 +140,19 @@ class AdminController extends Controller{
 
         return $this->redirect(['/admin/index']);
     }
-    public function actionAddPaid(){
 
+    public function actionAddPaid()
+    {
         $id = $_GET['id'];
         $model = PendingPayment::find()->where(['id' => $id])->one();
         $model->delete();
+        
         return $this->redirect(['/admin/index']);
     }
 
 
-    public function actionDeleteUser(){
+    public function actionDeleteUser()
+    {
         $id = $_GET['id'];
         $model = Users::find()->where(['id' => $id])->one();
 
@@ -162,20 +161,22 @@ class AdminController extends Controller{
         $model->delete();
 
         return $this->redirect(['/admin/index']);
-        //return $this->renderList();
     }
 
-    public function actionDeleteEvent(){  //удалить событие из таблицы
+    public function actionDeleteEvent()
+    {  
         $id = $_GET['id'];
         $model = LastEvent::find()->where(['id' => $id])->one();
 
         $model->afterDelete(Imgs::deleteAll(['id_Event' => $id]));
         $model->delete();
         Yii::$app->session->setFlash('success', 'Successful delete event!');
+        
         return $this->redirect(['/admin/event']);
     }
 
-    public function actionUpdateEvent(){  //удалить событие из таблицы
+    public function actionUpdateEvent()
+    {  
         $id = $_GET['id'];
         $update = new UpdateEventForm();
         $model = LastEvent::find()->where(['id' => $id])->one();
@@ -184,30 +185,31 @@ class AdminController extends Controller{
         $update->descript = $model->descript;
         $update->midimg = UploadedFile::getInstance($update, 'midimg');
         $update->manyimg = UploadedFile::getInstances($update, 'manyimg');
-        if($update->load(Yii::$app->request->post())){
+        if ($update->load(Yii::$app->request->post())) {
             if ($update->validate()) {
-                if($update->updateData($id)) {
+                if ($update->updateData($id)) {
                     Yii::$app->session->setFlash('success', 'Update event!');
                     return $this->redirect(['/admin/event']);
-                }else{
+                } else {
                     Yii::$app->session->setFlash('error', 'Error update data!');
                 }
-            }else{
+            } else {
                 Yii::$app->session->setFlash('error', 'Incorrect data!');
             }
-            
+
         }
 
-        return $this->render('update-event',[
-            'update'=>$update,
+        return $this->render('update-event', [
+            'update' => $update,
         ]);
     }
 
-    public function actionUpdateDish(){  //удалить событие из таблицы
+    public function actionUpdateDish()
+    {  
         $id = $_GET['id'];
-        $type = ['STARTERS'=>'STARTERS','MAINS'=>'MAINS','DESSERT'=>'DESSERT','LUNCH'=>'LUNCH','DINNER'=>'DINNER','DRINKS'=>'DRINKS'];
-        $position = ['themenu'=>'themenu','slider'=>'slider'];
-        
+        $type = ['STARTERS' => 'STARTERS', 'MAINS' => 'MAINS', 'DESSERT' => 'DESSERT', 'LUNCH' => 'LUNCH', 'DINNER' => 'DINNER', 'DRINKS' => 'DRINKS'];
+        $position = ['themenu' => 'themenu', 'slider' => 'slider'];
+
         $update = new UpdateDishForm();
         $model = Dishes::find()->where(['id' => $id])->one();
         $update->name = $model->name;
@@ -217,97 +219,95 @@ class AdminController extends Controller{
         $update->position = $model->position;
         $update->img = UploadedFile::getInstance($update, 'img');
 
-        if($update->load(Yii::$app->request->post())){
+        if ($update->load(Yii::$app->request->post())) {
             if ($update->validate()) {
-                if($update->updateData($id)) {
-                    Yii::$app->session->setFlash('success', 'Update dish: '.$model->name.' !');
+                if ($update->updateData($id)) {
+                    Yii::$app->session->setFlash('success', 'Update dish: ' . $model->name . ' !');
                     return $this->redirect(['/admin/dishes']);
-                }else{
+                } else {
                     Yii::$app->session->setFlash('error', 'Error update data!');
                 }
-            }else{
+            } else {
                 Yii::$app->session->setFlash('error', 'Incorrect data!');
             }
-
         }
 
-        return $this->render('update-dish',[
-            'update'=>$update,
-            'type'=>$type,
-            'position'=>$position,
+        return $this->render('update-dish', [
+            'update' => $update,
+            'type' => $type,
+            'position' => $position,
         ]);
     }
 
-    public function actionAddMenu(){  //удалить событие из таблицы
+    public function actionAddMenu()
+    {  
         $id = $_GET['id'];
         $update = new AddMenuForm();
         $day = Menu::find()->all();
         $massDay = ArrayHelper::map($day, 'id', 'day');
 
-        if($update->load(Yii::$app->request->post())){
+        if ($update->load(Yii::$app->request->post())) {
             if ($update->validate()) {
-                if($update->addMenu($id)) {
+                if ($update->addMenu($id)) {
                     Yii::$app->session->setFlash('success', 'Dish add menu!');
                     return $this->redirect(['/admin/dishes']);
-                }else{
+                } else {
                     Yii::$app->session->setFlash('error', 'Error update data!');
                 }
-            }else{
+            } else {
                 Yii::$app->session->setFlash('error', 'Incorrect data!');
             }
-
         }
 
-        return $this->render('add-menu',[
-            'update'=>$update,
-            'massDay'=>$massDay,
+        return $this->render('add-menu', [
+            'update' => $update,
+            'massDay' => $massDay,
         ]);
     }
 
 
-
-    public function actionDeleteDish(){  //удалить продукт из таблицы
+    public function actionDeleteDish()
+    {  
         $id = $_GET['id'];
         $model = Dishes::find()->where(['id' => $id])->one();
 
         $model->afterDelete(DishesMenu::deleteAll(['id_Dishes' => $id]));
         $model->delete();
         Yii::$app->session->setFlash('success', 'Successful delete Dish !');
+        
         return $this->redirect(['/admin/dishes']);
     }
 
-    public function actionDeleteMenu(){  //удалить продукт из таблицы
+    public function actionDeleteMenu()
+    {  
         $id = $_GET['id'];
         $model = DishesMenu::find()->where(['id' => $id])->one();
         $model->delete();
         Yii::$app->session->setFlash('success', 'Successful delete elem-menu !');
+        
         return $this->redirect(['/admin/admin-menu']);
     }
 
 
-    public function actionEvent(){
-
+    public function actionEvent()
+    {
         $addForm = new AddEventForm();
-        $update=new AddEventForm();
-        if($addForm->load(Yii::$app->request->post())) {
+        $update = new AddEventForm();
+        if ($addForm->load(Yii::$app->request->post())) {
             $addForm->midimg = UploadedFile::getInstance($addForm, 'midimg');
             $addForm->manyimg = UploadedFile::getInstances($addForm, 'manyimg');
             if ($addForm->validate()) {
-                if($addForm->saveData()) {
+                if ($addForm->saveData()) {
                     $this->refresh();
                     Yii::$app->session->setFlash('success', 'Add event!');
 
-                }else{
+                } else {
                     Yii::$app->session->setFlash('error', 'Error saving data!');
                 }
-            }else{
+            } else {
                 Yii::$app->session->setFlash('error', 'Incorrect data!');
             }
         }
-        /*if(Yii::$app->request->get()){
-            $id = $_GET['id'];
-        }*/
-
         $LastEventSql = LastEvent::find();
         $lastevents = new yii\data\ActiveDataProvider([
             'query' => $LastEventSql,
@@ -318,16 +318,16 @@ class AdminController extends Controller{
                 'attributes' => ['id', 'date'],
             ],
         ]);
-
-
-        return $this->render('event',[
+        
+        return $this->render('event', [
             'lastevents' => $lastevents,
             'addForm' => $addForm,
-            'update'=>$update,
+            'update' => $update,
         ]);
     }
 
-    public function actionDishes(){
+    public function actionDishes()
+    {
         $dishesSql = Dishes::find();
         $dishes = new yii\data\ActiveDataProvider([
             'query' => $dishesSql,
@@ -340,38 +340,37 @@ class AdminController extends Controller{
         ]);
 
         $addForm = new AddDishForm();
-        $type = ['STARTERS'=>'STARTERS','MAINS'=>'MAINS','DESSERT'=>'DESSERT','LUNCH'=>'LUNCH','DINNER'=>'DINNER','DRINKS'=>'DRINKS'];
-        $position = ['themenu'=>'themenu','slider'=>'slider'];
+        $type = ['STARTERS' => 'STARTERS', 'MAINS' => 'MAINS', 'DESSERT' => 'DESSERT', 'LUNCH' => 'LUNCH', 'DINNER' => 'DINNER', 'DRINKS' => 'DRINKS'];
+        $position = ['themenu' => 'themenu', 'slider' => 'slider'];
 
-        if($addForm->load(Yii::$app->request->post())) {
+        if ($addForm->load(Yii::$app->request->post())) {
             $addForm->img = UploadedFile::getInstance($addForm, 'img');
             if ($addForm->validate()) {
-                if($addForm->saveData()) {
+                if ($addForm->saveData()) {
                     $this->refresh();
                     Yii::$app->session->setFlash('success', 'Add dish!');
-                }else{
+                } else {
                     Yii::$app->session->setFlash('error', 'Error saving data!');
                 }
-            }else{
+            } else {
                 Yii::$app->session->setFlash('error', 'Incorrect data!');
             }
         }
 
-
-        return $this->render('dishes',[
+        return $this->render('dishes', [
             'dishes' => $dishes,
-            'addForm'=>$addForm,
-            'type'=>$type,
-            'position'=>$position,
+            'addForm' => $addForm,
+            'type' => $type,
+            'position' => $position,
         ]);
     }
-    
-    public function actionAdminMenu(){
 
-        $days = ['monday','tuesday','wednesday','thursday','friday','saturday','sunday'];
-        for ($i=0;$i<7;$i++){
+    public function actionAdminMenu()
+    {
+        $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+        for ($i = 0; $i < 7; $i++) {
             $dishMenu[$days[$i]] = new yii\data\ActiveDataProvider([
-                'query' => DishesMenu::find()->where('id_Menu='.($i+1)),
+                'query' => DishesMenu::find()->where('id_Menu=' . ($i + 1)),
                 'pagination' => [
                     'pageSize' => 15,
                 ],
@@ -380,15 +379,15 @@ class AdminController extends Controller{
                 ],
             ]);
         }
-
-
-        return $this->render('admin-menu',[
-            'dishMenu'=>$dishMenu,
-            'days'=>$days,
+        
+        return $this->render('admin-menu', [
+            'dishMenu' => $dishMenu,
+            'days' => $days,
         ]);
     }
-    
-    public function actionLogout(){
+
+    public function actionLogout()
+    {
         Yii::$app->user->logout();
 
         return $this->goHome();

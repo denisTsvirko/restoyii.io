@@ -1,16 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Alpo4
- * Date: 29.08.2017
- * Time: 16:32
- */
 
 namespace app\assets;
+
 use yii\web\AssetBundle;
 
-class AdminAsset extends AssetBundle{
-
+class AdminAsset extends AssetBundle
+{
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
@@ -26,6 +21,4 @@ class AdminAsset extends AssetBundle{
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapPluginAsset',
     ];
-
-
 }

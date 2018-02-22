@@ -25,8 +25,6 @@ use yii\data\Pagination;
 use yii\data\ActiveDataProvider;
 use app\classes\WriteImg;
 
-
-
 class SiteController extends Controller
 {
     public function actions()
@@ -35,20 +33,20 @@ class SiteController extends Controller
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],
-             'access' => [
+            'access' => [
                 'class' => AccessControl::className(),
-                 'rules' => [
-                     [
-                         'allow' => true,
-                         'actions' => ['login-user','login-admin'], // действия в контроллере
-                         'roles' => ['?'], // Доступ к действиям только для не авторизованных пользователей
-                     ],
-                     [
-                         'allow' => true,
-                         'actions' => ['logout'], // действия в контроллере
-                         'roles' => ['@'], // Доступ к действиям только для авторизованных пользователей
-                     ],
-                 ],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['login-user', 'login-admin'], 
+                        'roles' => ['?'], 
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['logout'], 
+                        'roles' => ['@'], 
+                    ],
+                ],
             ],
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
@@ -57,47 +55,37 @@ class SiteController extends Controller
         ];
     }
 
-   /* public function beforeAction($action)
+    public function actionIndex()
     {
-        if (parent::beforeAction($action)) {
-            if (!\Yii::$app->user->can($action->id)) {
-                throw new ForbiddenHttpException('Access denied');
-            }
-            return true;
-        } else {
-            return false;
-        }
-    }*/
-
-    public function actionIndex(){
-        $days = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
+        $days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
         $date = date("w");
 
-        $menu=Dishes::find()
-                ->join('LEFT JOIN', 'Dishes_Menu', 'Dishes_Menu.id_Dishes = Dishes.id')
-                ->join('LEFT JOIN', 'Menu', 'Menu.id = Dishes_Menu.id_Menu')
-                ->where('Menu.day='."'$days[$date]'")->select('Dishes.name, Dishes.cost, Dishes.info, Dishes.type')->limit(8)->all();
+        $menu = Dishes::find()
+            ->join('LEFT JOIN', 'Dishes_Menu', 'Dishes_Menu.id_Dishes = Dishes.id')
+            ->join('LEFT JOIN', 'Menu', 'Menu.id = Dishes_Menu.id_Menu')
+            ->where('Menu.day=' . "'$days[$date]'")->select('Dishes.name, Dishes.cost, Dishes.info, Dishes.type')->limit(8)->all();
 
-        $slider = Dishes::find()->where(['position'=>'slider'])->all();
-        if(Yii::$app->request->post()){
-            $voteDish = Dishes::find()->where(['id'=>$_POST['vote-id']])->one();
+        $slider = Dishes::find()->where(['position' => 'slider'])->all();
+        if (Yii::$app->request->post()) {
+            $voteDish = Dishes::find()->where(['id' => $_POST['vote-id']])->one();
             $vote = $_POST['score'];
             $numvote = $voteDish->numvote;
-            $raiting=$voteDish->raiting;
-            $voteDish->raiting=(($raiting*$numvote)+$vote)/($numvote+1);
-            $voteDish->numvote=$numvote+1;
+            $raiting = $voteDish->raiting;
+            $voteDish->raiting = (($raiting * $numvote) + $vote) / ($numvote + 1);
+            $voteDish->numvote = $numvote + 1;
             $voteDish->save();
             return json_encode([$voteDish->raiting, $voteDish->numvote]);
         }
 
-        return $this->render('index',[
+        return $this->render('index', [
             'slider' => $slider,
-            'menu' =>   $menu,
+            'menu' => $menu,
         ]);
     }
 
-    public function actionLoginUser(){
-        if(Yii::$app->user->isGuest) {
+    public function actionLoginUser()
+    {
+        if (Yii::$app->user->isGuest) {
             $userForm = new UserlogForm();
 
             if ($userForm->load(Yii::$app->request->post()) && $userForm->login()) {
@@ -107,85 +95,87 @@ class SiteController extends Controller
             return $this->render('login-user', [
                 'userForm' => $userForm,
             ]);
-        }else{
+        } else {
             $this->goBack();
         }
     }
 
-    public function actionLogout(){
+    public function actionLogout()
+    {
         Yii::$app->user->logout();
 
         return $this->goHome();
     }
 
-    public function actionLoginAdmin(){
-
-        if(Yii::$app->user->isGuest) {
+    public function actionLoginAdmin()
+    {
+        if (Yii::$app->user->isGuest) {
 
             $adminForm = new AdminLogForm();
 
-            if($adminForm->load(Yii::$app->request->post()) ){
-                if($adminForm->login()){
+            if ($adminForm->load(Yii::$app->request->post())) {
+                if ($adminForm->login()) {
                     return $this->redirect(['/admin/index']);
-                }else{
+                } else {
                     Yii::$app->session->setFlash('error', 'Incorrect password or name!');
                 }
             }
 
-            return $this->render('login-admin',[
-               'adminForm' => $adminForm,
+            return $this->render('login-admin', [
+                'adminForm' => $adminForm,
             ]);
-        }else{
+        } else {
             $this->goBack();
         }
     }
 
 
-
-    public function actionEvents(){
-
-        if((\Yii::$app->request->isAjax)&&($_POST['date'])){
+    public function actionEvents()
+    {
+        if ((\Yii::$app->request->isAjax) && ($_POST['date'])) {
             $date = date('Y-m-d', strtotime($_POST['date']));
-            $events = LastEvent::find()->where('date='."'".$date."'")->asArray()->all();
+            $events = LastEvent::find()->where('date=' . "'" . $date . "'")->asArray()->all();
             return json_encode($events);
         }
+        
         return $this->render('events');
     }
 
-    public function actionGetImg(){
-        if((\Yii::$app->request->isAjax)&&($_POST['id'])){
-            $imgs = Imgs::find()->where('id_Event='.$_POST['id'])->asArray()->all();
+    public function actionGetImg()
+    {
+        if ((\Yii::$app->request->isAjax) && ($_POST['id'])) {
+            $imgs = Imgs::find()->where('id_Event=' . $_POST['id'])->asArray()->all();
+            
             return json_encode($imgs);
         }
     }
 
-    public function actionIndexAdd(){
-        if(\Yii::$app->request->isAjax){
-            $days = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
+    public function actionIndexAdd()
+    {
+        if (\Yii::$app->request->isAjax) {
+            $days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
             $date = date("w");
 
-            $menu=Dishes::find() ->asArray()
+            $menu = Dishes::find()->asArray()
                 ->join('LEFT JOIN', 'Dishes_Menu', 'Dishes_Menu.id_Dishes = Dishes.id')
                 ->join('LEFT JOIN', 'Menu', 'Menu.id = Dishes_Menu.id_Menu')
-                ->where('Menu.day='."'$days[$date]'")->select('Dishes.name, Dishes.cost, Dishes.info, Dishes.type')->all();
+                ->where('Menu.day=' . "'$days[$date]'")->select('Dishes.name, Dishes.cost, Dishes.info, Dishes.type')->all();
 
             return json_encode($menu);
         }
     }
-
-
-
-    public function actionReviews(){
-        
+    
+    public function actionReviews()
+    {
         $review = new Reviews();
-        $comments = Reviews::find()->orderBy(['date'=>SORT_DESC]);
+        $comments = Reviews::find()->orderBy(['date' => SORT_DESC]);
         $pages = new Pagination(['totalCount' => $comments->count(), 'pageSize' => 10]);
         $pages->pageSizeParam = false;
         $models = $comments->offset($pages->offset)
             ->limit($pages->limit)
             ->all();
 
-        if($review->load(Yii::$app->request->post())){
+        if ($review->load(Yii::$app->request->post())) {
             $review->id_User = Yii::$app->user->identity->id;
             $review->date = date("y.m.d");
             $review->time = date("H:i:s");
@@ -201,23 +191,25 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionMenu(){
-        $days = ['monday','tuesday','wednesday','thursday','friday','saturday','sunday'];
-        
-        for ($i=0;$i<7;$i++){
-            $dishMenu[$days[$i]]=Dishes::find()
+    public function actionMenu()
+    {
+        $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+
+        for ($i = 0; $i < 7; $i++) {
+            $dishMenu[$days[$i]] = Dishes::find()
                 ->join('LEFT JOIN', 'Dishes_Menu', 'Dishes_Menu.id_Dishes = Dishes.id')
                 ->join('LEFT JOIN', 'Menu', 'Menu.id = Dishes_Menu.id_Menu')
-                ->where('Menu.day='."'$days[$i]'")->select('Dishes.name, Dishes.cost, Dishes.info, Dishes.type')->all();
+                ->where('Menu.day=' . "'$days[$i]'")->select('Dishes.name, Dishes.cost, Dishes.info, Dishes.type')->all();
         }
-        
-        return $this->render('menu',[
-            'days' =>$days,
-            'dishMenu'=>$dishMenu,
+
+        return $this->render('menu', [
+            'days' => $days,
+            'dishMenu' => $dishMenu,
         ]);
     }
 
-    public function actionContact(){
+    public function actionContact()
+    {
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
             Yii::$app->session->setFlash('contactFormSubmitted');
@@ -228,21 +220,23 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionOurStory(){
+    public function actionOurStory()
+    {
         return $this->render('our-story');
     }
 
 
-    public function actionReservations(){
+    public function actionReservations()
+    {
         $massTables = array();
-        $room =  Rooms::find()->all();
-        $massRooms =  ArrayHelper::map($room, 'id', 'hall');
+        $room = Rooms::find()->all();
+        $massRooms = ArrayHelper::map($room, 'id', 'hall');
         $events = Events::find()->all();
         $massEvents = ArrayHelper::map($events, 'id', 'event');
         $reservation = new Reservation();
 
-        if($reservation->load(Yii::$app->request->post())){
-            if($reservation->validate()) {
+        if ($reservation->load(Yii::$app->request->post())) {
+            if ($reservation->validate()) {
                 $user = new Users();
 
                 if (!Users::findByEmail($reservation->email)) {
@@ -277,45 +271,37 @@ class SiteController extends Controller
                 } else {
                     Yii::$app->session->setFlash('error', 'The table is withdrawn!');
                 }
-            }else{
+            } else {
                 Yii::$app->session->setFlash('error', 'Old date!');
             }
 
         }
 
-        if(\Yii::$app->request->isAjax){
+        if (\Yii::$app->request->isAjax) {
             $date = date("Y-m-d", strtotime($_POST['date']));
             $idRoom = $_POST['room'];
 
             $subQuery = Tables::find()->select('Tables.id')
-            ->join('LEFT JOIN', 'Reservations', 'Reservations.id_Table = Tables.id')
-                ->where(' Reservations.date = :date ', ['date'=>$date])
+                ->join('LEFT JOIN', 'Reservations', 'Reservations.id_Table = Tables.id')
+                ->where(' Reservations.date = :date ', ['date' => $date])
                 ->column();
             $tables = Tables::find()
                 ->where(['not', ['Tables.id' => $subQuery]])
-            ->andWhere('Tables.id_Room = :idRoom',['idRoom'=>$idRoom])->all();
-
+                ->andWhere('Tables.id_Room = :idRoom', ['idRoom' => $idRoom])->all();
 
 
             $massTables = ArrayHelper::map($tables, 'id', 'teble');
 
             $writeImg = new WriteImg($massTables);
 
-            if($idRoom==4) {
+            if ($idRoom == 4) {
                 $writeImg->crateImg(1);
-              //  $writeImg->updateImgMain();
-            }else{
+            } else {
                 $writeImg->crateImg(2);
-              //  $writeImg->updateImgVip();
             }
 
             return json_encode($massTables);
         }
-        return $this->render('reservations',compact('reservation','massRooms','massEvents','massTables'));
+        return $this->render('reservations', compact('reservation', 'massRooms', 'massEvents', 'massTables'));
     }
-
-    /*SELECT * FROM Tables WHERE (`Tables`.id)
-        NOT IN( SELECT `Tables`.id FROM Tables JOIN Reservations ON Reservations.id_Table = Tables.id WHERE Reservations.date = '2017-09-23') AND Tables.id_Room = 4
-
-    SELECT * FROM Tables WHERE (`Tables`.id) NOT IN( SELECT `Tables`.id FROM Tables JOIN Reservations ON Reservations.id_Table = Tables.id WHERE Reservations.date = '2017-09-23') AND Tables.id_Room = 4*/
 }

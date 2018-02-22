@@ -1,6 +1,7 @@
 <?php
 
 /* @var $this \yii\web\View */
+
 /* @var $content string */
 
 
@@ -10,7 +11,6 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AdminAsset;
 
-//AppAsset::register($this);
 AdminAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -44,14 +44,14 @@ AdminAsset::register($this);
             ['label' => 'Events', 'url' => ['/event']],
             ['label' => 'Dishes', 'url' => ['/dishes']],
             ['label' => 'Menu', 'url' => ['/admin-menu']],
-                '<li>'
-                . Html::beginForm(['/admin/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->name . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
+            '<li>'
+            . Html::beginForm(['/admin/logout'], 'post')
+            . Html::submitButton(
+                'Logout (' . Yii::$app->user->identity->name . ')',
+                ['class' => 'btn btn-link logout']
+            )
+            . Html::endForm()
+            . '</li>'
 
         ],
     ]);
@@ -67,10 +67,6 @@ AdminAsset::register($this);
 </div>
 
 <a href="#" class="scrollup">Наверх</a>
-
-
-
-
 
 <?php $this->endBody() ?>
 </body>
